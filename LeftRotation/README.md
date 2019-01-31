@@ -1,0 +1,1 @@
+Please find the link to this problem [here](https://www.hackerrank.com/challenges/array-left-rotation/problem)
