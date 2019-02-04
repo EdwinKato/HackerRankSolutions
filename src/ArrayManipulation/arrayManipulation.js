@@ -3,21 +3,21 @@
  * a range of elements. We then apply the Math.max method to get
  * the maximum value in the new array.
  */
-export default function arrayManipulation(n, queries) {
-  const newArray = new Array(n).fill(0);
+export default function arrayManipulation(arrayLength, queries) {
+  const array = new Array(arrayLength).fill(0);
   let max = 0;
   for (let i = 0; i < queries.length; i += 1) {
-    newArray[queries[i][0] - 1] += queries[i][2];
-    if (queries[i][1] < newArray.length) {
-      newArray[queries[i][1]] -= queries[i][2];
+    array[queries[i][0] - 1] += queries[i][2];
+    if (queries[i][1] < array.length) {
+      array[queries[i][1]] -= queries[i][2];
     }
   }
 
-  for (let j = 1; j < n; j += 1) {
-    newArray[j] += newArray[j - 1];
+  for (let j = 1; j < arrayLength; j += 1) {
+    array[j] += array[j - 1];
   }
 
-  newArray.forEach((value) => {
+  array.forEach((value) => {
     max = Math.max(max, value);
   });
 
