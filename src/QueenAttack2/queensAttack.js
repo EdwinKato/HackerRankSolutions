@@ -2,20 +2,20 @@
 export default function queensAttack(n, k, r_q, c_q, obstacles) {
   let rowRightObstacle = -1;
   let columnRightObstacle = -1;
-  const rowBottomRightObstacle = -1;
-  const columnBottomRightObstacle = -1;
-  const rowBottomObstacle = -1;
-  const columnBottomObstacle = -1;
-  const rowBottomLeftObstacle = -1;
-  const columnBottomLeftObstacle = -1;
-  const rowLeftObstacle = -1;
-  const columnLeftObstacle = -1;
-  const rowTopLeftObstacle = -1;
-  const columnTopLeftObstacle = -1;
-  const rowTopObstacle = -1;
-  const columnTopObstacle = -1;
-  const rowTopRightObstacle = -1;
-  const columnTopRightObstacle = -1;
+  let rowBottomRightObstacle = -1;
+  let columnBottomRightObstacle = -1;
+  let rowBottomObstacle = -1;
+  let columnBottomObstacle = -1;
+  let rowBottomLeftObstacle = -1;
+  let columnBottomLeftObstacle = -1;
+  let rowLeftObstacle = -1;
+  let columnLeftObstacle = -1;
+  let rowTopLeftObstacle = -1;
+  let columnTopLeftObstacle = -1;
+  let rowTopObstacle = -1;
+  let columnTopObstacle = -1;
+  let rowTopRightObstacle = -1;
+  let columnTopRightObstacle = -1;
 
   let totalSteps = 0;
 
@@ -25,47 +25,94 @@ export default function queensAttack(n, k, r_q, c_q, obstacles) {
 
     // Right
     if (
-      columnObstacle > c_q
+      (columnObstacle < columnRightObstacle || rowRightObstacle === -1)
+      && columnObstacle > c_q
       && rowObstacle === r_q
-      && (columnObstacle < columnRightObstacle || rowRightObstacle === -1)
     ) {
       rowRightObstacle = rowObstacle;
       columnRightObstacle = columnObstacle;
     }
 
     // Bottom right
-    if (rowBottomObstacle) {
-      // Add code here
+    if (
+      r_q - rowObstacle === columnObstacle - c_q
+      && columnObstacle > c_q
+      && rowObstacle < r_q
+      && ((rowObstacle > rowBottomRightObstacle
+        && columnObstacle < columnBottomRightObstacle)
+        || rowBottomRightObstacle === -1)
+    ) {
+      rowBottomRightObstacle = rowObstacle;
+      columnBottomRightObstacle = columnObstacle;
     }
 
     // Bottom
-    if (rowBottomObstacle) {
-      // Add code here
+    if (
+      (rowObstacle > rowBottomObstacle || rowBottomObstacle === -1)
+      && rowObstacle < r_q
+      && columnObstacle === c_q
+    ) {
+      rowBottomObstacle = rowObstacle;
+      columnBottomObstacle = columnObstacle;
     }
 
     // Bottom left
-    if (rowBottomObstacle) {
-      // Add code here
+    if (
+      r_q - rowObstacle === c_q - columnObstacle
+      && columnObstacle < c_q
+      && rowObstacle < r_q
+      && ((rowObstacle > rowBottomLeftObstacle
+        && columnObstacle > columnBottomLeftObstacle)
+        || rowBottomLeftObstacle === -1)
+    ) {
+      rowBottomLeftObstacle = rowObstacle;
+      columnBottomLeftObstacle = columnObstacle;
     }
 
     // Left
-    if (rowBottomObstacle) {
-      // Add code here
+    if (
+      (columnObstacle > rowLeftObstacle || rowLeftObstacle === -1)
+      && columnObstacle < c_q
+      && rowObstacle === r_q
+    ) {
+      rowLeftObstacle = rowObstacle;
+      columnLeftObstacle = columnObstacle;
     }
 
     // Top left
-    if (rowBottomObstacle) {
-      // Add code here
+    if (
+      c_q - columnObstacle === rowObstacle - r_q
+      && columnObstacle < c_q
+      && rowObstacle > r_q
+      && ((rowObstacle < rowTopLeftObstacle
+        && columnObstacle > columnTopLeftObstacle)
+        || rowTopLeftObstacle === -1)
+    ) {
+      rowTopLeftObstacle = rowObstacle;
+      columnTopLeftObstacle = columnObstacle;
     }
 
     // Top
-    if (rowBottomObstacle) {
-      // Add code here
+    if (
+      (rowObstacle < rowTopObstacle || rowTopObstacle === -1)
+      && rowObstacle > r_q
+      && columnObstacle === c_q
+    ) {
+      rowTopObstacle = rowObstacle;
+      columnTopObstacle = columnObstacle;
     }
 
     // Top right
-    if (rowBottomObstacle) {
-      // Add code here
+    if (
+      rowObstacle - r_q === columnObstacle - c_q
+      && columnObstacle > c_q
+      && rowObstacle > r_q
+      && ((rowObstacle < rowTopRightObstacle
+        && columnObstacle < columnTopRightObstacle)
+        || rowTopRightObstacle === -1)
+    ) {
+      rowTopRightObstacle = rowObstacle;
+      columnTopRightObstacle = columnObstacle;
     }
   }
 
