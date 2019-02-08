@@ -17,8 +17,6 @@ export default function queensAttack(n, k, r_q, c_q, obstacles) {
   let rowTopRightObstacle = -1;
   let columnTopRightObstacle = -1;
 
-  let totalSteps = 0;
-
   for (let i = 0; i < k; i += 1) {
     const rowObstacle = obstacles[i][0];
     const columnObstacle = obstacles[i][1];
@@ -52,6 +50,7 @@ export default function queensAttack(n, k, r_q, c_q, obstacles) {
       && rowObstacle < r_q
       && columnObstacle === c_q
     ) {
+      console.log(`Bottom: (${rowObstacle}, ${columnObstacle})`);
       rowBottomObstacle = rowObstacle;
       columnBottomObstacle = columnObstacle;
     }
@@ -75,6 +74,7 @@ export default function queensAttack(n, k, r_q, c_q, obstacles) {
       && columnObstacle < c_q
       && rowObstacle === r_q
     ) {
+      console.log(`Left: (${rowObstacle}, ${columnObstacle})`);
       rowLeftObstacle = rowObstacle;
       columnLeftObstacle = columnObstacle;
     }
@@ -116,32 +116,31 @@ export default function queensAttack(n, k, r_q, c_q, obstacles) {
     }
   }
 
-  // R B L T
-  totalSteps
-    += columnRightObstacle !== -1 ? columnBottomRightObstacle - c_q - 1 : n - c_q;
-  totalSteps
-    += rowBottomObstacle !== -1 ? r_q - rowBottomObstacle - 1 : r_q - 1;
-  totalSteps
-    += columnRightObstacle !== -1 ? c_q - columnLeftObstacle - 1 : c_q - 1;
-  totalSteps += rowTopObstacle !== -1 ? r_q - rowTopObstacle - 1 : n - r_q;
+  const rightSteps = columnRightObstacle !== -1 ? columnRightObstacle - c_q - 1 : n - c_q;
+  const bottomSteps = rowBottomObstacle !== -1 ? r_q - rowBottomObstacle - 1 : r_q - 1;
+  const leftSteps = columnLeftObstacle !== -1 ? c_q - columnLeftObstacle - 1 : c_q - 1;
+  const topSteps = rowTopObstacle !== -1 ? r_q - rowTopObstacle - 1 : n - r_q;
+  const bottomRightSteps = columnBottomRightObstacle !== -1
+    ? columnBottomRightObstacle - c_q - 1
+    : Math.min(r_q - 1, n - c_q);
+  const bottomLeftSteps = rowBottomLeftObstacle !== -1
+    ? c_q - columnBottomLeftObstacle - 1
+    : Math.min(r_q - 1, c_q - 1);
+  const topLeftSteps = columnTopLeftObstacle !== -1
+    ? c_q - columnTopLeftObstacle - 1
+    : Math.min(n - r_q, c_q - 1);
+  const topRightSteps = rowTopRightObstacle !== -1
+    ? columnTopRightObstacle - c_q - 1
+    : Math.min(n - r_q, n - c_q);
 
-  // BR BL TL TR
-  totalSteps
-    += columnBottomRightObstacle !== -1
-      ? columnBottomRightObstacle - c_q - 1
-      : Math.min(r_q - 1, n - c_q);
-  totalSteps
-    += rowBottomLeftObstacle !== -1
-      ? c_q - columnBottomLeftObstacle - 1
-      : Math.min(r_q - 1, c_q - 1);
-  totalSteps
-    += columnTopLeftObstacle !== -1
-      ? c_q - columnTopLeftObstacle - 1
-      : Math.min(n - r_q, c_q - 1);
-  totalSteps
-    += rowTopRightObstacle !== -1
-      ? columnTopRightObstacle - c_q - 1
-      : Math.min(n - r_q, n - c_q);
-
-  return totalSteps;
+  return (
+    rightSteps
+    + bottomSteps
+    + leftSteps
+    + topSteps
+    + bottomRightSteps
+    + bottomLeftSteps
+    + topLeftSteps
+    + topRightSteps
+  );
 }
