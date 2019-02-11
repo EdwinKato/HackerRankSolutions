@@ -50,7 +50,6 @@ export default function queensAttack(n, k, r_q, c_q, obstacles) {
       && rowObstacle < r_q
       && columnObstacle === c_q
     ) {
-      console.log(`Bottom: (${rowObstacle}, ${columnObstacle})`);
       rowBottomObstacle = rowObstacle;
       columnBottomObstacle = columnObstacle;
     }
@@ -74,7 +73,6 @@ export default function queensAttack(n, k, r_q, c_q, obstacles) {
       && columnObstacle < c_q
       && rowObstacle === r_q
     ) {
-      console.log(`Left: (${rowObstacle}, ${columnObstacle})`);
       rowLeftObstacle = rowObstacle;
       columnLeftObstacle = columnObstacle;
     }
@@ -119,7 +117,7 @@ export default function queensAttack(n, k, r_q, c_q, obstacles) {
   const rightSteps = columnRightObstacle !== -1 ? columnRightObstacle - c_q - 1 : n - c_q;
   const bottomSteps = rowBottomObstacle !== -1 ? r_q - rowBottomObstacle - 1 : r_q - 1;
   const leftSteps = columnLeftObstacle !== -1 ? c_q - columnLeftObstacle - 1 : c_q - 1;
-  const topSteps = rowTopObstacle !== -1 ? r_q - rowTopObstacle - 1 : n - r_q;
+  const topSteps = rowTopObstacle !== -1 ? rowTopObstacle - r_q - 1 : n - r_q;
   const bottomRightSteps = columnBottomRightObstacle !== -1
     ? columnBottomRightObstacle - c_q - 1
     : Math.min(r_q - 1, n - c_q);
